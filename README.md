@@ -2,6 +2,19 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.17.
 
+#commands
+
+npm install --save @angular/material @angular/cdk @angular/animations hammerjs
+
+ng add @angular/material
+
+#Integrate Firebase:
+
+npm install firebase@4.6.1 angularfire2@5.0.0-rc.3 --save
+
+npm install --save rxjs-compat
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
