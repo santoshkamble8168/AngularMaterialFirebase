@@ -1,0 +1,75 @@
+<form [formGroup]="employeeService.form" (submit)="onSubmit()">
+    <mat-grid-list cols="2" rowHeight="300px">
+        <mat-grid-tile>
+            <div class="container container-control">
+                <input type="hidden" formControlName="$key">
+
+                <mat-form-field>
+                    <input matInput formControlName="fullName" placeholder="Full Name">
+                    <mat-error>Please enter full Name</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput formControlName="email" placeholder="Email">
+                    <mat-error *ngIf="employeeService.form.controls['email'].errors?.required">Please Enter Email</mat-error>
+                    <mat-error *ngIf="employeeService.form.controls['email'].errors?.email">Please Enter valid Email</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput formControlName="mobile" placeholder="Mobile">
+                    <mat-error *ngIf="employeeService.form.controls['mobile'].errors?.required">Please Enter Mobile Number</mat-error>
+                    <mat-error *ngIf="employeeService.form.controls['mobile'].errors?.minLength">Please Enter valid Mobile Number</mat-error>
+                    <mat-error *ngIf="employeeService.form.controls['mobile'].errors?.maxLength">Please Enter valid Mobile Number</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput formControlName="city" placeholder="City">
+                </mat-form-field>
+
+            </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <div class="container container-control">
+
+                <div class="add-bottom-padding">
+                    <mat-radio-group formControlName="gender">
+                        <mat-radio-button value="1">Male</mat-radio-button>
+                        <mat-radio-button value="2">Female</mat-radio-button>
+                        <mat-radio-button value="3">Other</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <mat-form-field>
+                    <mat-label>Department</mat-label>
+                    <mat-select formControlName="department" placeholder="Select Department">
+                        <mat-option>None</mat-option>
+                        <ng-container *ngFor="let department of departmentService.array">
+                            <mat-option value="{{department.$key}}">{{department.code}}-{{department.name}}</mat-option>
+                          </ng-container>
+                    </mat-select>
+                    <mat-error>Please Select Department</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input formControlName="hiredate" matInput [matDatepicker]="picker" placeholder="Choose a date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error>Please Select hire Date</mat-error>
+                </mat-form-field>
+
+                <div class="permanent-div">
+                    <mat-checkbox formControlName="isPermanent">Permanent Employee</mat-checkbox>
+                </div>
+
+                <div class="submit-button-row">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="employeeService.form.invalid">Submit</button>
+                    <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+                </div>
+
+            </div>
+        </mat-grid-tile>
+
+
+    </mat-grid-list>
+</form>
